@@ -1,0 +1,69 @@
+
+1. Create the Student Database
+
+CREATE DATABASE student_management;
+USE student_management;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Create Tables with Constraints
+
+Table 1: student_info
+
+CREATE TABLE student_info (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50),
+    gender ENUM('Male', 'Female', 'Other'),
+    dob DATE,
+    email VARCHAR(100) UNIQUE
+);
+
+------------------------------------------------------------ 
+
+Table 2: course_enrollment
+
+CREATE TABLE course_enrollment (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    course_name VARCHAR(100),
+    enrollment_date DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (student_id) REFERENCES student_info(student_id) ON DELETE CASCADE
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Insert Sample Records
+
+INSERT INTO student_info (first_name, last_name, gender, dob, email) 
+VALUES 
+('Arun', 'Kumar', 'Male', '1998-07-15', 'arun.kumar@gmail.com'),
+('Meena', 'Ravi', 'Female', '2000-02-10', 'meena.ravi@gmail.com');
+
+--------------------------------------------
+Insert into course_enrollment
+
+INSERT INTO course_enrollment (student_id, course_name) 
+VALUES 
+(1, 'Data Science'),
+(2, 'Database Systems');
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Update a Record
+Update Meena's course enrollment:
+
+UPDATE course_enrollment 
+SET course_name = 'Python Programming' 
+WHERE student_id = 2;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Delete a Record
+Remove Arun's record and related enrollments:
+
+DELETE FROM student_info 
+WHERE student_id = 1;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
