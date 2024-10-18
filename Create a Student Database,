@@ -1,4 +1,8 @@
 
+1.Create a Student Database, Create Tables with constraint Inserting Updating/Deleting Records in a Table
+
+
+
 1. Create the Student Database
 
 CREATE DATABASE student_management;
