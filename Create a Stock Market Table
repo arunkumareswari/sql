@@ -1,0 +1,90 @@
+-- StockMarket Table
+
+-- Create StockMarket table
+CREATE TABLE StockMarket (
+    StockID INT PRIMARY KEY,
+    StockName VARCHAR(50) NOT NULL,
+    StockPrice DECIMAL(10, 2) NOT NULL,
+    Volume INT NOT NULL
+);
+
+-----------------------------------------------------------
+
+-- Create CustomerDetails table
+CREATE TABLE CustomerDetails (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50) NOT NULL,
+    PhoneNumber VARCHAR(15) UNIQUE NOT NULL,
+    StockID INT,
+    FOREIGN KEY (StockID) REFERENCES StockMarket(StockID)
+);
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- Insert sample data into StockMarket
+INSERT INTO StockMarket (StockID, StockName, StockPrice, Volume) VALUES
+(1, 'Company A', 100.50, 1000),
+(2, 'Company B', 200.75, 1500),
+(3, 'Company C', 50.00, 2000),
+(4, 'Company D', 75.25, 3000);
+
+
+---------------------------------------------------------------------------------------
+
+INSERT INTO CustomerDetails (CustomerID, CustomerName, PhoneNumber, StockID) VALUES
+(1, 'Arun', '12345 67890', 1),
+(2, 'Mani', '98765 43210', 2),
+(3, 'Kani', '55512 34567', NULL),        -- No stock
+(4, 'Zoya', '44498 76543', 3),
+(5, 'Ravi', '66612 37890', 1),
+(6, 'Geetha', '77745 61234', 4),
+(7, 'Vignesh', '88832 19876', NULL),     -- No stock
+(8, 'Sudha', '99965 43210', 4);
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- INNER JOIN
+
+SELECT 
+    c.CustomerID,
+    c.CustomerName,
+    s.StockName,
+    s.StockPrice
+FROM 
+    CustomerDetails c
+INNER JOIN 
+    StockMarket s ON c.StockID = s.StockID;
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- LEFT JOIN 
+
+SELECT 
+    c.CustomerID,
+    c.CustomerName,
+    s.StockName,
+    s.StockPrice
+FROM 
+    CustomerDetails c
+LEFT JOIN 
+    StockMarket s ON c.StockID = s.StockID;
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- RIGHT JOIN: 
+
+SELECT 
+    c.CustomerID,
+    c.CustomerName,
+    s.StockName,
+    s.StockPrice
+FROM 
+    CustomerDetails c
+RIGHT JOIN 
+    StockMarket s ON c.StockID = s.StockID;
