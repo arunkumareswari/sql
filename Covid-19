@@ -1,0 +1,86 @@
+CREATE TABLE covid_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    country VARCHAR(50),
+    `date` DATE,
+    total_cases INT,
+    new_cases INT,
+    total_deaths INT,
+    new_deaths INT,
+    total_vaccinations INT
+);
+
+
+
+INSERT INTO covid_data (country,`date` , total_cases, new_cases, total_deaths, new_deaths, total_vaccinations)
+VALUES 
+('India', '2023-01-01', 1000000, 2000, 25000, 50, 500000),
+('India', '2023-01-02', 1002000, 2500, 25050, 60, 520000),
+('USA', '2023-01-01', 5000000, 3000, 100000, 200, 3000000),
+('USA', '2023-01-02', 5003000, 3500, 100200, 250, 3200000),
+('Brazil', '2023-01-01', 4000000, 1000, 120000, 30, 2500000),
+('Brazil', '2023-01-02', 4001000, 1500, 120030, 40, 2600000);
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- Countries with Total Deaths Greater Than 100,000
+
+SELECT 
+    country, 
+    SUM(total_deaths) AS total_deaths
+FROM covid_data
+GROUP BY country
+HAVING SUM(total_deaths) > 100000;
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Identify Countries with an Average of More Than 2,000 New Cases per Day
+SELECT 
+    country, 
+    AVG(new_cases) AS avg_new_cases
+FROM covid_data
+GROUP BY country
+HAVING AVG(new_cases) > 2000;
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Count the Number of Records per Country
+
+SELECT 
+    country, 
+    COUNT(*) AS record_count
+FROM covid_data
+GROUP BY country
+HAVING COUNT(*) > 1;
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Find the Maximum New Cases Reported for Each Country
+
+SELECT 
+    country, 
+    MAX(new_cases) AS max_new_cases
+FROM covid_data
+GROUP BY country
+HAVING MAX(new_cases) > 2000;
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Find the Minimum Total Deaths Per Country
+
+SELECT 
+    country, 
+    MIN(total_deaths) AS min_total_deaths
+FROM covid_data
+GROUP BY country
+HAVING MIN(total_deaths) < 50000;
+
+
