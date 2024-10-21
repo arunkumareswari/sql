@@ -1,0 +1,58 @@
+use my_database;
+
+CREATE TABLE StockMarket (
+    StockID INT PRIMARY KEY,
+    StockName VARCHAR(50) NOT NULL,
+    StockPrice DECIMAL(10, 2) NOT NULL,
+    Volume INT NOT NULL
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO StockMarket (StockID, StockName, StockPrice, Volume) VALUES
+(1, 'Company A', 150.00, 1000),
+(2, 'Company B', 75.50, 2000),
+(3, 'Company C', 200.25, 500),
+(4, 'Company A', 155.00, 1500),
+(5, 'Company B', 80.00, 1200),
+(6, 'Company C', 205.00, 800);
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Total Volume by Stock
+
+SELECT StockName, SUM(Volume) AS TotalVolume
+FROM StockMarket
+GROUP BY StockName;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--  Stocks with Average Price Above a Certain Threshold
+
+SELECT StockName, AVG(StockPrice) AS AveragePrice
+FROM StockMarket
+GROUP BY StockName
+HAVING AVG(StockPrice) > 150.00;
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Total Volume for Stocks with Average Price Greater than 150.00
+
+SELECT StockName, SUM(Volume) AS TotalVolume
+FROM StockMarket
+GROUP BY StockName
+HAVING AVG(StockPrice) > 150.00;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Minimum and Maximum Stock Price by Company
+
+SELECT StockName,
+       MIN(StockPrice) AS MinimumPrice,
+       MAX(StockPrice) AS MaximumPrice
+FROM StockMarket
+GROUP BY StockName;
