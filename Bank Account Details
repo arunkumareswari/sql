@@ -1,0 +1,53 @@
+-- View all databases
+ SHOW DATABASES;
+
+-- Create a database: 
+CREATE DATABASE record2;
+
+-- Use a database: 
+USE record2;
+
+-- View all tables: 
+SHOW TABLES;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- Creating a Bank Account Details Table with NULL Values
+
+
+CREATE TABLE BankAccountDetails (
+    AccountID INT PRIMARY KEY,
+    AccountHolderName VARCHAR(50) NOT NULL,
+    AccountNumber VARCHAR(20) NOT NULL,
+    Balance DECIMAL(10, 2) NULL,
+    PhoneNumber VARCHAR(15) NULL
+);
+
+
+
+INSERT INTO BankAccountDetails (AccountID, AccountHolderName, AccountNumber, Balance, PhoneNumber) VALUES
+(1, 'Arun', 'AC123456789', NULL, NULL),
+(2, 'Mani', 'AC987654321', 5000.00, '9876543210'),
+(3, 'Kalyani', 'AC123123123', NULL, NULL),
+(4, 'Vignesh', 'AC456789123', 2500.50, NULL),
+(5, 'Sudha', 'AC321654987', 7500.00, '3216549870'),
+(6, 'Ravi', 'AC654987321', NULL, NULL),
+(7, 'Lakshmi', 'AC987321654', 1000.00, NULL),
+(8, 'Santhosh', 'AC741258963', NULL, NULL),
+(9, 'Mithun', 'AC258963147', NULL, NULL),
+(10, 'Geetha', 'AC369258147', 1200.00, '3692581470');
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Inserting Records with NULL Values
+UPDATE BankAccountDetails
+SET Balance = 1500.00, PhoneNumber = '1234567890'
+WHERE AccountID = 1;
+
+UPDATE BankAccountDetails
+SET Balance = 4000,PhoneNumber='9643563322'
+WHERE AccountId= 3;
+
+
+
